@@ -1,7 +1,7 @@
 version: "5.0"
 services:
   interview-questions:
-    image: questions
+    image: ernestodeorozco/questions
     ports:
       - "8080:8080"
     networks:
