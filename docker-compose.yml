@@ -1,14 +1,5 @@
 version: "5.0"
 services:
-  questions-frontend:
-    image: questions-frontend
-    ports:
-      - "3000:3000"
-    networks:
-      - questions-mysql
-    depends_on:
-      - interview-questions
-
   interview-questions:
     image: questions
     ports:
