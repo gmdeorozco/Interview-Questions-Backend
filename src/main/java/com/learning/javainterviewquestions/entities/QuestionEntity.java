@@ -43,10 +43,5 @@ public class QuestionEntity implements Serializable {
     @JoinColumn(name="question_id", nullable=true)
     private Source source;
 
-   
-
-    @ManyToOne
-    @JoinColumn(name = "source_id", nullable = true )
-    Source source;
 
 }

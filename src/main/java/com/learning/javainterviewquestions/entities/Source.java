@@ -1,4 +1,3 @@
-
 package com.learning.javainterviewquestions.entities;
 
 import java.util.ArrayList;
