@@ -33,5 +33,9 @@ public class QuestionEntity implements Serializable {
     
     private String answer;
     private String topic;
+    private double elo;
+
+     @Column(length=500)
+    private String sourceLink;
 
 }
