@@ -5,6 +5,11 @@ com/learning/javainterviewquestions/repositories/QuestionRepository.class
 com/learning/javainterviewquestions/models/SourceModel.class
 com/learning/javainterviewquestions/entities/QuestionEntity$QuestionEntityBuilder.class
 com/learning/javainterviewquestions/services/QuestionService.class
+<<<<<<< HEAD
+=======
+com/learning/javainterviewquestions/entities/Source.class
+com/learning/javainterviewquestions/models/QuestionModel.class
+>>>>>>> ff07c133e63bfd0337b772f07f2f239ee1ed499f
 com/learning/javainterviewquestions/controllers/QuestionController.class
 com/learning/javainterviewquestions/repositories/SourceRepository.class
 com/learning/javainterviewquestions/JavaInterviewQuestionsApplication.class
