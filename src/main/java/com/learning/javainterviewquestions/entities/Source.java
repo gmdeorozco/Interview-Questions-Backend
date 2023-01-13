@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity @NoArgsConstructor @AllArgsConstructor @Data
 public class Source{
 
     @Id
