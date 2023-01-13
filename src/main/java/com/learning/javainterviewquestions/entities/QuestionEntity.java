@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +37,10 @@ public class QuestionEntity implements Serializable {
     private String topic;
     private double elo;
 
-     @Column(length=500)
-    private String sourceLink;
+    @ManyToOne
+    @JoinColumn(name="question_id", nullable=true)
+    private Source source;
+
+   
 
 }
