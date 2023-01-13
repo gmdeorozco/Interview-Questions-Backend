@@ -5,8 +5,11 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import com.learning.javainterviewquestions.controllers.QuestionController;
+import com.learning.javainterviewquestions.controllers.SourceController;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
+import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.models.QuestionModel;
+import com.learning.javainterviewquestions.models.SourceModel;
 import com.learning.javainterviewquestions.services.QuestionService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -55,8 +58,28 @@ public class QuestionModelAssembler extends
         questionModel.setQuestion( entity.getQuestion());
         questionModel.setAnswer( entity.getAnswer());
         questionModel.setTopic( entity.getTopic());
+        questionModel.setSource( toSourceModel( entity.getSource()) );
+        
 
         return questionModel;
+    }
+
+
+    private SourceModel toSourceModel(Source source) {
+        if ( source == null  )
+        return null;
+
+        return SourceModel.builder()
+            .id( source.getId())
+            .elo( source.getElo())
+            .sourceLink( source.getSourceLink())
+            .topic( source.getTopic())
+            .build() 
+        .add( linkTo(
+            methodOn(SourceController.class)
+                .findById( source.getId() )
+        ).withSelfRel());
+        
     }
 
     
