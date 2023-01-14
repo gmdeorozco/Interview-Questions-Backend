@@ -133,4 +133,13 @@ public class QuestionController {
         return questionService.getAllTopics();
     }
 
+    @PostMapping("question/{id}/setsource/{sourceId}")
+    public ResponseEntity<QuestionModel> setSource( @PathVariable(value="id") Long questionId,  
+        @PathVariable(value="sourceId") long sourceId){
+            if( questionService.setSource(questionId, sourceId)){
+                new ResponseEntity<>(HttpStatus.OK);
+            }
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
 }

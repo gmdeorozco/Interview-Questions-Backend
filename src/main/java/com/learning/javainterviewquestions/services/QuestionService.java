@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.learning.javainterviewquestions.entities.QuestionEntity;
+import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.models.QuestionModel;
 import com.learning.javainterviewquestions.repositories.QuestionRepository;
 
@@ -20,6 +21,9 @@ public class QuestionService {
 
     @Autowired
     QuestionRepository questionRepository;
+
+    @Autowired 
+    SourcesService sourcesService;
 
     public Optional<QuestionEntity> findById( Long id ) {
         return questionRepository.findById(id);
@@ -62,6 +66,23 @@ public class QuestionService {
         return findAll().stream()
             .map( question -> question.getTopic())
             .collect(Collectors.toSet());
+    }
+
+    public Boolean setSource( Long questionId, Long sourceId ){
+        try{
+            QuestionEntity question = findById(questionId).get();
+            Source source = sourcesService.findById(sourceId).get();
+
+            question.setSource(source);
+            return true;
+        }
+        catch( Exception e){
+            return false;
+        }
+        
+        
+
+
     }
 
 }
