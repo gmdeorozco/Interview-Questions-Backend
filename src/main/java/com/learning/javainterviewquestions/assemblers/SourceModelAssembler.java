@@ -34,6 +34,7 @@ RepresentationModelAssemblerSupport <Source, SourceModel> {
         sourceModel.setQuestions( toQuestionModel( entity.getQuestions()));
         sourceModel.setSourceLink( entity.getSourceLink());
         sourceModel.setTopic( entity.getTopic());
+        sourceModel.setName( entity.getName());
         
         sourceModel.add(
             linkTo(

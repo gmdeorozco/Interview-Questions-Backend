@@ -19,4 +19,5 @@ public class SourceModel extends RepresentationModel <SourceModel>{
     private List<QuestionModel> questions;
     private String sourceLink;
     private String topic;
+    private String name;
 }
