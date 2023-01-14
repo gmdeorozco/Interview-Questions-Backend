@@ -40,7 +40,7 @@ public class QuestionEntity implements Serializable {
     private double elo;
 
     @ManyToOne
-    @JoinColumn(name="question_id", nullable=true)
+    @JoinColumn(name="source_id", nullable=true)
     private Source source;
 
 
