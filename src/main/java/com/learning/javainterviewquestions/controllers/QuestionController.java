@@ -59,6 +59,15 @@ public class QuestionController {
              
     }
 
+    @PostMapping("question/create/onsource/{sourceId}")
+    public ResponseEntity<QuestionModel> save( @RequestBody QuestionEntity questionEntity,
+        @PathVariable(value = "sourceId") Long sourceId) {
+
+            return ResponseEntity.ok(
+                (questionModelAssembler.toModel( questionService.save ( questionEntity, sourceId ) )));
+             
+    }
+
     @PostMapping("question/create/many")
     public ResponseEntity<CollectionModel<QuestionModel>> save( @RequestBody List< QuestionEntity> questionEntities ) {
 

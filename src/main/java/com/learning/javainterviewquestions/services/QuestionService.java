@@ -25,6 +25,7 @@ public class QuestionService {
     @Autowired 
     SourcesService sourcesService;
 
+
     public Optional<QuestionEntity> findById( Long id ) {
         return questionRepository.findById(id);
     }
@@ -77,6 +78,12 @@ public class QuestionService {
             return save(question);
 
 
+    }
+
+    public QuestionEntity save(QuestionEntity questionEntity, Long sourceId) {
+        QuestionEntity question = save(questionEntity);
+        question.setSource( sourcesService.findById(sourceId).get());
+        return question;
     }
 
 }
