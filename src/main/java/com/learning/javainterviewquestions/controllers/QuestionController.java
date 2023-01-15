@@ -136,10 +136,12 @@ public class QuestionController {
     @PostMapping("question/{id}/setsource/{sourceId}")
     public ResponseEntity<QuestionModel> setSource( @PathVariable(value="id") Long questionId,  
         @PathVariable(value="sourceId") long sourceId){
-            if( questionService.setSource(questionId, sourceId)){
-                new ResponseEntity<>(HttpStatus.OK);
-            }
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+            QuestionModel model = 
+                questionModelAssembler
+                    .toModel( questionService.setSource(questionId, sourceId));
+
+            return  new ResponseEntity<QuestionModel>(model,HttpStatus.NOT_FOUND);
         }
 
 }

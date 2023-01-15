@@ -68,22 +68,13 @@ public class QuestionService {
             .collect(Collectors.toSet());
     }
 
-    public Boolean setSource( Long questionId, Long sourceId ){
-        try{
+    public QuestionEntity setSource( Long questionId, Long sourceId ){
+       
             QuestionEntity question = findById( questionId ).get();
             Source source = sourcesService.findById( sourceId ).get();
 
             question.setSource(source);
-            save(question);
-
-            return true;
-        }
-        catch( Exception e){
-            System.out.println( e.getMessage() );
-            return false;
-        }
-        
-        
+            return save(question);
 
 
     }
