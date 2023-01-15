@@ -3,6 +3,7 @@ package com.learning.javainterviewquestions.controllers;
 import java.util.List;
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.javainterviewquestions.assemblers.QuestionModelAssembler;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
+import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.models.QuestionModel;
 import com.learning.javainterviewquestions.services.QuestionService;
+import com.learning.javainterviewquestions.services.SourcesService;
 
 @RestController
 @RequestMapping( "/api/v1" )
@@ -36,6 +39,9 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    SourcesService sourcesService;
 
     @Autowired
     QuestionModelAssembler questionModelAssembler;
@@ -78,6 +84,22 @@ public class QuestionController {
 
     @PutMapping("question/update")
     public ResponseEntity<QuestionModel> update( @RequestBody QuestionEntity questionEntity) {
+
+            return ResponseEntity.ok(
+                (questionModelAssembler.toModel( questionService.save ( questionEntity ) )));
+             
+    }
+
+    @PutMapping("question/update/source/{sourceId}")
+    public ResponseEntity<QuestionModel> updateWithSource( @RequestBody QuestionEntity questionEntity,
+        @PathVariable(value = "sourceId") Long sourceId ) {
+
+        Source source = sourcesService.findById(sourceId).get();
+        questionEntity.setSource( source);
+        source.getQuestions().add(questionEntity);
+
+        sourcesService.save(source);
+
 
             return ResponseEntity.ok(
                 (questionModelAssembler.toModel( questionService.save ( questionEntity ) )));
