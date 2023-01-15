@@ -137,6 +137,24 @@ public class QuestionController {
                 ,questionModelAssembler), HttpStatus.OK);
     }
 
+    @GetMapping("question/topic/{topic}/source/{sourceId}")
+    public ResponseEntity<CollectionModel<QuestionModel>> findByTopicAndSource( @PathVariable(value="topic") String topic,
+    @PathVariable(value="sourceId") Long sourceId,
+    @RequestParam(defaultValue = "0")int page
+    , @RequestParam(defaultValue = "10") int size) {
+
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<QuestionEntity> questionEntities = (topic!=null && topic!="all" && topic!="") ? 
+            questionService.findByTopicAndSource( topic, sourceId, pageable )
+            : questionService.findAll(pageable);
+        
+        return new ResponseEntity<>
+            (pagedResourcesAssembler.toModel(questionEntities
+                ,questionModelAssembler), HttpStatus.OK);
+    }
+
     @GetMapping("question/topics")
     public Set<String> getAllTopics(){
         return questionService.getAllTopics();

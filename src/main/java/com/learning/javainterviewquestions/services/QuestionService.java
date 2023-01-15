@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,20 @@ public class QuestionService {
         return questionRepository.findByTopic(topic, pageable);
     }
 
+    public Page<QuestionEntity> findByTopicAndSource( String topic, Long sourceId, Pageable pageable) {
+        List<QuestionEntity> users = questionRepository.findAll().stream()
+            .filter(question -> question.getSource() != null )
+            .filter(question -> question.getSource().getId() == sourceId)
+            .toList();
+
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), users.size());
+        final Page<QuestionEntity> page = new PageImpl<>(users.subList(start, end), pageable, users.size());
+
+        return page;
+            
+    }
+
     public Page <QuestionEntity> findAll( Pageable pageable ) {
         return questionRepository.findAll(pageable);
     }
@@ -86,7 +101,6 @@ public class QuestionService {
         question.setSource( source );
         source.getQuestions().add(question);
         sourcesService.save(source);
-
 
         return question;
     }

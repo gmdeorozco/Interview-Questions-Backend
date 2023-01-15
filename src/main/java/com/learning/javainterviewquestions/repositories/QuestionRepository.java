@@ -12,5 +12,7 @@ import com.learning.javainterviewquestions.entities.QuestionEntity;
 public interface QuestionRepository extends  JpaRepository < QuestionEntity, Long >{
 
     Page<QuestionEntity> findByTopic ( String topic, Pageable pageable );
+
+    Page<QuestionEntity> findByTopicAndSource(String topic, Long sourceId, Pageable pageable);
     
 }
