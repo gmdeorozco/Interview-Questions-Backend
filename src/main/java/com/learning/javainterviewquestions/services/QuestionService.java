@@ -82,7 +82,11 @@ public class QuestionService {
 
     public QuestionEntity save(QuestionEntity questionEntity, Long sourceId) {
         QuestionEntity question = save(questionEntity);
-        question.setSource( sourcesService.findById(sourceId).get());
+        Source source = sourcesService.findById(sourceId).get();
+        question.setSource( source );
+        source.getQuestions().add(question);
+
+
         return question;
     }
 
