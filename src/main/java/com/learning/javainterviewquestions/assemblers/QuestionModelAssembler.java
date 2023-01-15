@@ -74,6 +74,7 @@ public class QuestionModelAssembler extends
             .elo( source.getElo())
             .sourceLink( source.getSourceLink())
             .topic( source.getTopic())
+            .name( source.getName())
             .build() 
         .add( linkTo(
             methodOn(SourceController.class)
