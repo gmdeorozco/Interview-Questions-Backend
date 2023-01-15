@@ -1,5 +1,6 @@
 package com.learning.javainterviewquestions.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -107,6 +108,20 @@ public class SourceController {
         return new ResponseEntity<>
             (pagedResourcesAssembler.toModel(questionEntities
                 ,sourceModelAssembler), HttpStatus.OK);
+    }
+
+    @GetMapping("source/topic/{topic}/all")
+    public ResponseEntity<CollectionModel<SourceModel>> findByTopic( 
+        @PathVariable(value="topic") String topic ) {
+
+
+        ArrayList<Source> sourceEntities = (topic!=null && topic!="all" && topic!="") ? 
+            sourcesService.findByTopic( topic )
+            : (ArrayList<Source>) sourcesService.findAll();
+        
+        return new ResponseEntity<>(
+            sourceModelAssembler.toCollectionModel(sourceEntities),
+            HttpStatus.OK);
     }
 
     @GetMapping("source/all")

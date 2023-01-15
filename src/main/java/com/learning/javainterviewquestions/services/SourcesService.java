@@ -1,5 +1,6 @@
 package com.learning.javainterviewquestions.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,11 @@ public class SourcesService {
 
     public Page<Source> findByTopic(String topic, Pageable pageable) {
         return sourceRepository.findByTopic(topic, pageable);
+    }
+
+
+    public ArrayList<Source> findByTopic(String topic) {
+        return (ArrayList<Source>) sourceRepository.findByTopic(topic);
     }
     
 }
