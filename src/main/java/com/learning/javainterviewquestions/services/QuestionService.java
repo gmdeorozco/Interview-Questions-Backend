@@ -85,6 +85,7 @@ public class QuestionService {
         Source source = sourcesService.findById(sourceId).get();
         question.setSource( source );
         source.getQuestions().add(question);
+        sourcesService.save(source);
 
 
         return question;
