@@ -70,13 +70,16 @@ public class QuestionService {
 
     public Boolean setSource( Long questionId, Long sourceId ){
         try{
-            QuestionEntity question = findById(questionId).get();
-            Source source = sourcesService.findById(sourceId).get();
+            QuestionEntity question = findById( questionId ).get();
+            Source source = sourcesService.findById( sourceId ).get();
 
             question.setSource(source);
+            save(question);
+
             return true;
         }
         catch( Exception e){
+            System.out.println( e.getMessage() );
             return false;
         }
         
