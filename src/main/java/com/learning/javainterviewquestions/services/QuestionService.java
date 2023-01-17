@@ -38,7 +38,11 @@ public class QuestionService {
     public boolean deleteById ( Long id ){
         try{
 
-            
+                QuestionEntity entity = findById(id).get();
+                entity.getTheTopic().getQuestions().remove(entity);
+                
+                
+
                 questionRepository.delete(findById(id).get());
                 return true;
                 
