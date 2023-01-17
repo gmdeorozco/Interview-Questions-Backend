@@ -57,7 +57,7 @@ public class QuestionModelAssembler extends
         questionModel.setId( entity.getId() );
         questionModel.setQuestion( entity.getQuestion());
         questionModel.setAnswer( entity.getAnswer());
-        questionModel.setTopic( entity.getTopic());
+        questionModel.setTopic( entity.getTheTopic().getName() );
         questionModel.setSource( toSourceModel( entity.getSource()) );
         
 
@@ -73,7 +73,7 @@ public class QuestionModelAssembler extends
             .id( source.getId())
             .elo( source.getElo())
             .sourceLink( source.getSourceLink())
-            .topic( source.getTopic())
+            .topic( source.getTheTopic().getName() )
             .name( source.getName())
             .build() 
         .add( linkTo(

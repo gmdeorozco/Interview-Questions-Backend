@@ -33,7 +33,7 @@ RepresentationModelAssemblerSupport <Source, SourceModel> {
         sourceModel.setElo( entity.getElo() );
         sourceModel.setQuestions( toQuestionModel( entity.getQuestions()));
         sourceModel.setSourceLink( entity.getSourceLink());
-        sourceModel.setTopic( entity.getTopic());
+        sourceModel.setTopic( entity.getTheTopic().getName() );
         sourceModel.setName( entity.getName());
         
         sourceModel.add(
@@ -71,7 +71,7 @@ RepresentationModelAssemblerSupport <Source, SourceModel> {
             .id( question.getId())
             .question( question.getQuestion())
             .answer( question.getAnswer())
-            .topic( question.getTopic())
+            .topic( question.getTheTopic().getName())
             .build())
         .collect( Collectors.toList());
     }
