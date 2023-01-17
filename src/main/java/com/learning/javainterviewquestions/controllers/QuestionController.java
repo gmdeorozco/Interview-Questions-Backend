@@ -5,6 +5,7 @@ import java.util.Set;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Retry.Topic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learning.javainterviewquestions.assemblers.QuestionModelAssembler;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
 import com.learning.javainterviewquestions.entities.Source;
+import com.learning.javainterviewquestions.entities.TopicEntity;
 import com.learning.javainterviewquestions.models.QuestionModel;
+import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.QuestionService;
 import com.learning.javainterviewquestions.services.SourcesService;
+import com.learning.javainterviewquestions.services.TopicService;
 
 @RestController
 @RequestMapping( "/api/v1" )
@@ -47,6 +51,9 @@ public class QuestionController {
     QuestionModelAssembler questionModelAssembler;
 
     @Autowired
+    TopicService topicService;
+
+    @Autowired
     private PagedResourcesAssembler<QuestionEntity> pagedResourcesAssembler;
 
     @GetMapping("/question/{id}")
@@ -60,8 +67,15 @@ public class QuestionController {
     @PostMapping("question/create")
     public ResponseEntity<QuestionModel> save( @RequestBody QuestionEntity questionEntity) {
 
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic() );
+            questionEntity.setTheTopic(topic);
+
+            QuestionEntity question = questionService.save ( questionEntity );
+
+            topic.getQuestions().add( question );
+
             return ResponseEntity.ok(
-                (questionModelAssembler.toModel( questionService.save ( questionEntity ) )));
+                (questionModelAssembler.toModel( question )));
              
     }
 
@@ -69,8 +83,15 @@ public class QuestionController {
     public ResponseEntity<QuestionModel> save( @RequestBody QuestionEntity questionEntity,
         @PathVariable(value = "sourceId") Long sourceId) {
 
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic() );
+            questionEntity.setTheTopic(topic);
+
+            QuestionEntity question = questionService.save ( questionEntity, sourceId );
+
+            topic.getQuestions().add( question );
+
             return ResponseEntity.ok(
-                (questionModelAssembler.toModel( questionService.save ( questionEntity, sourceId ) )));
+                (questionModelAssembler.toModel( question )));
              
     }
 

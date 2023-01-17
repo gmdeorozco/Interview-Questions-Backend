@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.javainterviewquestions.assemblers.SourceModelAssembler;
 import com.learning.javainterviewquestions.entities.Source;
+import com.learning.javainterviewquestions.entities.TopicEntity;
 import com.learning.javainterviewquestions.models.SourceModel;
 import com.learning.javainterviewquestions.services.SourcesService;
+import com.learning.javainterviewquestions.services.TopicService;
 
 @RestController
 @RequestMapping( "/api/v1" )
@@ -41,6 +43,9 @@ public class SourceController {
 
     @Autowired
     private PagedResourcesAssembler<Source> pagedResourcesAssembler;
+
+    @Autowired
+    TopicService topicService;
 
     @GetMapping("/source/{id}")
     public ResponseEntity<SourceModel> findById(@PathVariable (value = "id") Long id) {
@@ -83,8 +88,14 @@ public class SourceController {
     @PostMapping("source/create")
     public ResponseEntity<SourceModel> save( @RequestBody Source source) {
 
+        TopicEntity topic = topicService.findByName(source.getTopic());
+        source.setTheTopic(topic);
+
+        Source s = sourcesService.save ( source );
+        topic.getSources().add(s);
+
             return ResponseEntity.ok(
-                (sourceModelAssembler.toModel( sourcesService.save ( source ) )));
+                (sourceModelAssembler.toModel( s )));
              
     }
 
