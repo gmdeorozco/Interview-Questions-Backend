@@ -78,12 +78,7 @@ public class QuestionService {
         return questionRepository.findAll(pageable);
     }
 
-    public Set<String> getAllTopics(){
-        return findAll().stream()
-            .map( question -> question.getTopic())
-            .collect(Collectors.toSet());
-    }
-
+    
     public QuestionEntity setSource( Long questionId, Long sourceId ){
        
             QuestionEntity question = findById( questionId ).get();

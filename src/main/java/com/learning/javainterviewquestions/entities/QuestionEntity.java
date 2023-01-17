@@ -37,6 +37,13 @@ public class QuestionEntity implements Serializable {
     
     private String answer;
     private String topic;
+
+    @ManyToOne
+    @JoinColumn(name="theTopic_id")
+    private TopicEntity theTopic;
+
+    
+
     private double elo;
 
     @ManyToOne

@@ -177,10 +177,7 @@ public class QuestionController {
                 ,questionModelAssembler), HttpStatus.OK);
     }
 
-    @GetMapping("question/topics")
-    public Set<String> getAllTopics(){
-        return questionService.getAllTopics();
-    }
+    
 
     @PostMapping("question/{id}/setsource/{sourceId}")
     public ResponseEntity<QuestionModel> setSource( @PathVariable(value="id") Long questionId,  
