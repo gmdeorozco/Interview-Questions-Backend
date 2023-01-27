@@ -8,8 +8,8 @@ com/learning/javainterviewquestions/entities/QuestionEntity$QuestionEntityBuilde
 com/learning/javainterviewquestions/services/QuestionService.class
 com/learning/javainterviewquestions/repositories/TopicRepository.class
 com/learning/javainterviewquestions/controllers/TopicController.class
-com/learning/javainterviewquestions/controllers/QuestionController.class
 com/learning/javainterviewquestions/entities/TopicEntity.class
+com/learning/javainterviewquestions/controllers/QuestionController.class
 com/learning/javainterviewquestions/repositories/SourceRepository.class
 com/learning/javainterviewquestions/services/TopicService.class
 com/learning/javainterviewquestions/JavaInterviewQuestionsApplication.class

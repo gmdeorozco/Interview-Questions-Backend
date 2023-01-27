@@ -2,6 +2,7 @@ package com.learning.javainterviewquestions.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import com.learning.javainterviewquestions.entities.TopicEntity;
 import com.learning.javainterviewquestions.models.SourceModel;
 import com.learning.javainterviewquestions.services.SourcesService;
 import com.learning.javainterviewquestions.services.TopicService;
+import com.mysql.cj.util.StringUtils;
 
 @RestController
 @RequestMapping( "/api/v1" )
@@ -105,7 +107,9 @@ public class SourceController {
     }
 
     @GetMapping("source/topic/{topic}")
-    public ResponseEntity<CollectionModel<SourceModel>> findByTopic( @PathVariable(value="topic") String topic,
+    public ResponseEntity<CollectionModel<SourceModel>> 
+        findByTopic( 
+            @PathVariable(name = "topic", required = false) String topic,
     @RequestParam(defaultValue = "0")int page
     , @RequestParam(defaultValue = "10") int size) {
 
@@ -121,12 +125,13 @@ public class SourceController {
                 ,sourceModelAssembler), HttpStatus.OK);
     }
 
-    @GetMapping("source/topic/{topic}/all")
+    @GetMapping( value = {"source/topic/{topic}/all","source/topic/all"} )
     public ResponseEntity<CollectionModel<SourceModel>> findByTopic( 
-        @PathVariable(value="topic") String topic ) {
+        @PathVariable(required = false) String topic ) {
 
 
-        ArrayList<Source> sourceEntities = (topic!=null && topic!="all" && topic!="") ? 
+        ArrayList<Source> sourceEntities = 
+            topic != null ? 
             sourcesService.findByTopic( topic )
             : (ArrayList<Source>) sourcesService.findAll();
         
