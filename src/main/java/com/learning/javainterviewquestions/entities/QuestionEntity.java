@@ -30,6 +30,8 @@ public class QuestionEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Lob
+    @Column(length=9000)
     private String question;
 
     @Lob
