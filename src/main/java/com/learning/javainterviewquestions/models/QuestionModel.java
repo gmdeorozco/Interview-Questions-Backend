@@ -21,6 +21,7 @@ public class QuestionModel extends RepresentationModel <QuestionModel> {
     private String question;
     private String answer;
     private String topic;
+    private String code_snippet;
     private SourceModel source;
     
     

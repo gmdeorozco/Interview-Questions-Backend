@@ -72,6 +72,7 @@ RepresentationModelAssemblerSupport <Source, SourceModel> {
             .question( question.getQuestion())
             .answer( question.getAnswer())
             .topic( question.getTheTopic().getName())
+            .code_snippet( question.getCode_snippet())
             .build())
         .collect( Collectors.toList());
     }
