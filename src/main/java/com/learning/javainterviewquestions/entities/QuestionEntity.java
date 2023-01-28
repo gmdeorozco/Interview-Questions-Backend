@@ -36,8 +36,12 @@ public class QuestionEntity implements Serializable {
 
     @Lob
     @Column(length=9000)
-    
     private String answer;
+
+    @Lob
+    @Column(length=9000)
+    private String code_snippet;
+
     private String topic;
 
     @ManyToOne
