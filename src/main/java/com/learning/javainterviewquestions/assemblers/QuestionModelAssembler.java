@@ -59,6 +59,7 @@ public class QuestionModelAssembler extends
         questionModel.setAnswer( entity.getAnswer());
         questionModel.setTopic( entity.getTheTopic().getName() );
         questionModel.setSource( toSourceModel( entity.getSource()) );
+        questionModel.setCode_snippet(entity.getCode_snippet());
         
 
         return questionModel;
