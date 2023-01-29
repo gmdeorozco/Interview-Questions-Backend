@@ -32,7 +32,7 @@ public class Member {
     private String lastname;
 
     @Builder.Default
-    private double elo=0;
+    private double elo=1000;
 
     @Builder.Default
     @ManyToMany
