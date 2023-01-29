@@ -54,8 +54,8 @@ public class QuestionEntity implements Serializable {
     private TopicEntity theTopic;
 
     
-
-    private double elo;
+    @Builder.Default
+    private double elo=1000;
 
     @JsonIgnore
     @ManyToOne

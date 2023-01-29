@@ -69,6 +69,7 @@ public class QuestionController {
 
             TopicEntity topic = topicService.findByName( questionEntity.getTopic() );
             questionEntity.setTheTopic(topic);
+            
 
             QuestionEntity question = questionService.save ( questionEntity );
 
@@ -114,7 +115,7 @@ public class QuestionController {
             TopicEntity topic = topicService.findByName( questionEntity.getTopic());
 
             questionEntity.setTheTopic(topic);
-            
+
 
             return ResponseEntity.ok(
                 (questionModelAssembler.toModel( questionService.save ( questionEntity ) )));
