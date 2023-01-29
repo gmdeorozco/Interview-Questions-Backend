@@ -23,7 +23,8 @@ public class QuestionModel extends RepresentationModel <QuestionModel> {
     private String topic;
     private String code_snippet;
     private SourceModel source;
-    
+    private int numberOfAnswers;
+    private double elo;
     
     
 }
