@@ -49,7 +49,7 @@ public class MemberController {
 
 
         WebClient client = WebClient.create(
-            "https://eloservice-production.up.railway.app/elo"
+            "https://eloservice-production.up.railway.app/elo/"
                 
                 ) ;
             
