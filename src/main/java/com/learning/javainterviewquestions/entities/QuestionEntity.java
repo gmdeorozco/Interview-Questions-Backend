@@ -48,6 +48,7 @@ public class QuestionEntity implements Serializable {
 
     private String topic;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="theTopic_id")
     private TopicEntity theTopic;
@@ -56,6 +57,7 @@ public class QuestionEntity implements Serializable {
 
     private double elo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="source_id", nullable=true)
     private Source source;
