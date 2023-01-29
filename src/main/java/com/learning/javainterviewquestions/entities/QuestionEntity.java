@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,6 +60,7 @@ public class QuestionEntity implements Serializable {
     @JoinColumn(name="source_id", nullable=true)
     private Source source;
 
+    @JsonIgnore
     @Builder.Default
     @ManyToMany(mappedBy = "answeredQuestions")
     private List<Member> membersWhoAnswered =  new ArrayList<>();

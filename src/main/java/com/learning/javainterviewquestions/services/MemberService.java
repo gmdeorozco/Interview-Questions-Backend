@@ -21,5 +21,6 @@ public class MemberService {
     public Member save(Member member) {
         return memberRepository.save(member);
     }
+    
 
 }

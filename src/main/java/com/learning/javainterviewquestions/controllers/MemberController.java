@@ -34,6 +34,11 @@ public class MemberController {
 
     @Autowired
     QuestionService questionService;
+
+    @GetMapping("/{memberId}")
+    public Member getById( @PathVariable Long memberId){
+        return memberService.findById(memberId).get();
+    }
     
     @GetMapping("/{memberId}/{questionId}/{whoWon}")
     public ResponseEntity<EloResult> processElos(
