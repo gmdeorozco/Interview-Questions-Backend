@@ -1,6 +1,7 @@
 package com.learning.javainterviewquestions.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -55,6 +57,14 @@ public class QuestionEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name="source_id", nullable=true)
     private Source source;
+
+    @Builder.Default
+    @ManyToMany(mappedBy = "answeredQuestions")
+    private List<Member> membersWhoAnswered =  new ArrayList<>();
+
+    public int getNumberOfAnswers(){
+        return this.membersWhoAnswered.size();
+    }
 
 
 }
