@@ -116,10 +116,16 @@ public class QuestionController {
         @PathVariable(value = "sourceId") Long sourceId ) {
 
         Source source = sourcesService.findById(sourceId).get();
+        TopicEntity topic = topicService.findByName( questionEntity.getTopic());
+
         questionEntity.setSource( source);
+        questionEntity.setTheTopic(topic);
+
         source.getQuestions().add(questionEntity);
+        topic.getQuestions().add(questionEntity);
 
         sourcesService.save(source);
+        topicService.save(topic);
 
 
             return ResponseEntity.ok(
