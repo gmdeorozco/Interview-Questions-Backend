@@ -25,5 +25,6 @@ com/learning/javainterviewquestions/repositories/TopicRepository.class
 com/learning/javainterviewquestions/controllers/TopicController.class
 com/learning/javainterviewquestions/JavaInterviewQuestionsApplication.class
 com/learning/javainterviewquestions/models/SourceModel$SourceModelBuilder.class
+com/learning/javainterviewquestions/elo/Player$PlayerBuilder.class
 com/learning/javainterviewquestions/elo/EloResult.class
 com/learning/javainterviewquestions/elo/EloResult$EloResultBuilder.class
