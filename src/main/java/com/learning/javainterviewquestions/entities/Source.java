@@ -31,7 +31,7 @@ public class Source{
     @Column( length=500 )
     private String sourceLink;
 
-    @OneToMany( mappedBy="source", cascade = CascadeType.ALL )
+    @OneToMany( mappedBy="source", cascade = CascadeType.MERGE )
     List<QuestionEntity> questions =  new ArrayList<>();
 
     private String topic;

@@ -26,9 +26,9 @@ public class TopicEntity {
     @Column( unique = true )
     private String name;
 
-    @OneToMany( mappedBy="theTopic", cascade = CascadeType.ALL )
+    @OneToMany( mappedBy="theTopic", cascade = CascadeType.MERGE )
     List<QuestionEntity> questions =  new ArrayList<>();
 
-    @OneToMany( mappedBy="theTopic", cascade = CascadeType.ALL )
+    @OneToMany( mappedBy="theTopic", cascade = CascadeType.MERGE )
     List<Source> sources =  new ArrayList<>();
 }
