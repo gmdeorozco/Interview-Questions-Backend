@@ -18,4 +18,8 @@ public class MemberService {
         return memberRepository.findById(memberId);
     }
 
+    public Member save(Member member) {
+        return memberRepository.save(member);
+    }
+
 }

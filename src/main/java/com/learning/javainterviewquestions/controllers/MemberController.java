@@ -64,6 +64,13 @@ public class MemberController {
             .bodyToMono(EloResult.class)
             .block();
         
+        member.getAnsweredQuestions().add(question);
+        question.getMembersWhoAnswered().add(member);
+        member.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
+        question.setElo( Double.valueOf( createdResult.getPlayer2().getNewElo() ) );
+
+        memberService.save( member );
+        questionService.save( question );
 
         return ResponseEntity.ok( createdResult );
     }
