@@ -96,7 +96,7 @@ public class QuestionController {
              
     }
 
-    @PostMapping("question/create/many")
+    @PostMapping( "question/create/many" )
     public ResponseEntity<CollectionModel<QuestionModel>> save( @RequestBody List< QuestionEntity> questionEntities ) {
 
             return ResponseEntity.ok(
@@ -104,7 +104,7 @@ public class QuestionController {
              
     }
 
-    @PutMapping("question/update")
+    @PutMapping( "question/update" )
     public ResponseEntity<QuestionModel> update( @RequestBody QuestionEntity questionEntity) {
 
             QuestionEntity original = questionService.findById( questionEntity.getId() ).get();
@@ -122,7 +122,7 @@ public class QuestionController {
              
     }
 
-    @PutMapping("question/update/source/{sourceId}")
+    @PutMapping( "question/update/source/{sourceId}" )
     public ResponseEntity<QuestionModel> updateWithSource( @RequestBody QuestionEntity questionEntity,
         @PathVariable(value = "sourceId") Long sourceId ) {
 
@@ -148,7 +148,7 @@ public class QuestionController {
              
     }
 
-    @DeleteMapping("question/{id}/delete")
+    @DeleteMapping( "question/{id}/delete" )
     public ResponseEntity<QuestionModel> deleteById( @PathVariable(value = "id") Long id ){
         ResponseEntity<QuestionModel> model = questionService.findById( id )
             .map( questionModelAssembler :: toModel )

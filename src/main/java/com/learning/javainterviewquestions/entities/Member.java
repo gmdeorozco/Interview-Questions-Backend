@@ -3,6 +3,7 @@ package com.learning.javainterviewquestions.entities;
 import java.util.List;
 import java.util.ArrayList;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
@@ -35,7 +36,13 @@ public class Member {
     private double elo=1000;
 
     @Builder.Default
-    @ManyToMany
+    @ManyToMany(cascade =
+    {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST
+    })
     @JoinTable(
         name = "member_question", 
         joinColumns = @JoinColumn(name = "member_id"), 
