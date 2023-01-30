@@ -41,7 +41,7 @@ public class QuestionService {
                 QuestionEntity entity = findById(id).get();
                 entity.getTheTopic().getQuestions().remove(entity);
                 
-                
+                entity.getMembersWhoAnswered().remove(entity);
 
                 questionRepository.delete(findById(id).get());
                 return true;
