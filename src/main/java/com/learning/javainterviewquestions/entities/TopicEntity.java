@@ -26,9 +26,11 @@ public class TopicEntity {
     @Column( unique = true )
     private String name;
 
+    @Builder.Default
     @OneToMany( mappedBy="theTopic", cascade = CascadeType.MERGE )
     List<QuestionEntity> questions =  new ArrayList<>();
 
+    @Builder.Default
     @OneToMany( mappedBy="theTopic", cascade = CascadeType.MERGE )
     List<Source> sources =  new ArrayList<>();
 }

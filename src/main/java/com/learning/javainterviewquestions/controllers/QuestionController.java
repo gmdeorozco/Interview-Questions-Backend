@@ -74,8 +74,8 @@ public class QuestionController {
 
             topic.getQuestions().add( question );
 
-            return ResponseEntity.ok(
-                (questionModelAssembler.toModel( question )));
+            return new ResponseEntity<>( questionModelAssembler.toModel( question ), HttpStatus.CREATED);
+                
              
     }
 
