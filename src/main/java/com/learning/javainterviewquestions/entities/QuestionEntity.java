@@ -1,6 +1,9 @@
 package com.learning.javainterviewquestions.entities;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.Size;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,21 +28,25 @@ public class QuestionEntity implements Serializable {
     private Long id;
 
     @Lob
-    @Column(length=9000)
+    @Column(length=9000, nullable = false)
+    @Size(max = 9000, min = 5)
     private String question;
 
     @Lob
-    @Column(length=9000)
+    @Column(length=9000, nullable = false)
+    @Size(max = 9000, min = 5)
     private String answer;
 
     @Lob
     @Column(length=9000)
     private String code_snippet;
 
+    @Column(nullable = false)
+    @Size(min = 3)
     private String topic;
 
     @ManyToOne
-    @JoinColumn(name="theTopic_id")
+    @JoinColumn(name="theTopic_id", nullable = false)
     private TopicEntity theTopic;
 
     

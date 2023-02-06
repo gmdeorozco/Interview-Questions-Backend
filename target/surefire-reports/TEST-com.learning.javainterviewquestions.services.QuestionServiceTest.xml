@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.learning.javainterviewquestions.services.TopicServiceTest" time="2.302" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.learning.javainterviewquestions.services.QuestionServiceTest" time="4.84" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -52,9 +52,55 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="givenSavedEntities_whenFindByName_returnTheRequestedTopic" classname="com.learning.javainterviewquestions.services.TopicServiceTest" time="0.384"/>
-  <testcase name="givenUnexistingTopicName_whenFindByName_ReturnEmptyOptional" classname="com.learning.javainterviewquestions.services.TopicServiceTest" time="0.075"/>
-  <testcase name="givenSavedEntities_whenFindAllTriggered_thenReturnListOfTopicEntities" classname="com.learning.javainterviewquestions.services.TopicServiceTest" time="0.025"/>
-  <testcase name="givenTwoEntitiesWithSameName_whenSavingEntities_ReturnException" classname="com.learning.javainterviewquestions.services.TopicServiceTest" time="0.076"/>
-  <testcase name="givenTopicEntity_whenSaving_thenReturnTopicEntityWithId" classname="com.learning.javainterviewquestions.services.TopicServiceTest" time="0.016"/>
+  <testcase name="givenQuestionAndTopic_whenSaveQuestion_thenReturnItWithId" classname="com.learning.javainterviewquestions.services.QuestionServiceTest" time="0.263">
+    <error message="Cannot invoke &quot;com.learning.javainterviewquestions.entities.QuestionEntity.getQuestion()&quot; because &quot;saved&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "com.learning.javainterviewquestions.entities.QuestionEntity.getQuestion()" because "saved" is null
+	at com.learning.javainterviewquestions.services.QuestionServiceTest.givenQuestionAndTopic_whenSaveQuestion_thenReturnItWithId(QuestionServiceTest.java:80)
+</error>
+    <system-out><![CDATA[08:40:55.543 [main] DEBUG org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [QuestionServiceTest]: using SpringBootContextLoader
+08:40:55.548 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.learning.javainterviewquestions.services.QuestionServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+08:40:55.621 [main] DEBUG org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Using ContextCustomizers for test class [QuestionServiceTest]: [ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, DisableAutoConfigurationContextCustomizer, DisableObservabilityContextCustomizer, TypeExcludeFiltersContextCustomizer, PropertyMappingContextCustomizer, Customizer]
+08:40:55.701 [main] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/workspace/Interview-Questions-Backend/target/classes/com/learning/javainterviewquestions/JavaInterviewQuestionsApplication.class]
+08:40:55.703 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.learning.javainterviewquestions.JavaInterviewQuestionsApplication for test class com.learning.javainterviewquestions.services.QuestionServiceTest
+08:40:55.720 [main] DEBUG org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Using TestExecutionListeners for test class [QuestionServiceTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, ResetMocksTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener]
+08:40:55.721 [main] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [QuestionServiceTest], class annotated with @DirtiesContext [false] with mode [null]
+08:40:56.251 [main] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test class com.learning.javainterviewquestions.services.QuestionServiceTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.1)
+
+2023-02-06T08:40:56.633Z  INFO 35171 --- [           main] c.l.j.services.QuestionServiceTest       : Starting QuestionServiceTest using Java 17.0.6 with PID 35171 (started by gitpod in /workspace/Interview-Questions-Backend)
+2023-02-06T08:40:56.635Z  INFO 35171 --- [           main] c.l.j.services.QuestionServiceTest       : No active profile set, falling back to 1 default profile: "default"
+2023-02-06T08:40:57.356Z  INFO 35171 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-06T08:40:57.438Z  INFO 35171 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 3 JPA repository interfaces.
+2023-02-06T08:40:57.482Z  INFO 35171 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2023-02-06T08:40:57.672Z  INFO 35171 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:7459acb1-6761-4475-92a4-2fcf7d4436eb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2023-02-06T08:40:57.968Z  INFO 35171 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-06T08:40:58.044Z  INFO 35171 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-02-06T08:40:58.095Z  WARN 35171 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-02-06T08:40:58.224Z  INFO 35171 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists question_entity cascade 
+Hibernate: drop table if exists source cascade 
+Hibernate: drop table if exists topic cascade 
+Hibernate: drop sequence if exists question_entity_seq
+Hibernate: create sequence question_entity_seq start with 1 increment by 50
+Hibernate: create table question_entity (id bigint not null, answer clob, code_snippet clob, elo float(53) not null, question clob, topic varchar(255), source_id bigint, the_topic_id bigint, primary key (id))
+Hibernate: create table source (id bigint generated by default as identity, elo float(53) not null, name varchar(255), source_link varchar(500), topic varchar(255), the_topic_id bigint, primary key (id))
+Hibernate: create table topic (id bigint generated by default as identity, name varchar(255), primary key (id))
+Hibernate: alter table if exists source add constraint UK_4a1uurs8rtj4xnah2j9uguec0 unique (name)
+Hibernate: alter table if exists topic add constraint UK_mbunn9erv8nmf5lk1r2nu0nex unique (name)
+Hibernate: alter table if exists question_entity add constraint FKcaxfs2ixsoxb1bmwj9lfxehst foreign key (source_id) references source
+Hibernate: alter table if exists question_entity add constraint FK4y4goppwq4r9vmyalxq60f8uh foreign key (the_topic_id) references topic
+Hibernate: alter table if exists source add constraint FK2k8voecyupccdsr973jkfatag foreign key (the_topic_id) references topic
+2023-02-06T08:40:58.924Z  INFO 35171 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-06T08:40:58.932Z  INFO 35171 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-06T08:40:59.912Z  INFO 35171 --- [           main] c.l.j.services.QuestionServiceTest       : Started QuestionServiceTest in 3.638 seconds (process running for 5.181)
+Hibernate: insert into topic (id, name) values (default, ?)
+1
+]]></system-out>
+  </testcase>
 </testsuite>

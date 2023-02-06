@@ -21,27 +21,20 @@ public class QuestionService {
     @Autowired 
     SourcesService sourcesService;
 
+    public QuestionEntity save(QuestionEntity questionEntity) {
+        return questionRepository.save( questionEntity );
+    }
 
     public Optional<QuestionEntity> findById( Long id ) {
         return questionRepository.findById(id);
     }
 
-    public QuestionEntity save(QuestionEntity questionEntity) {
-        return questionRepository.save( questionEntity );
-    }
-
     public boolean deleteById ( Long id ){
         try{
-
                 QuestionEntity entity = findById(id).get();
                 entity.getTheTopic().getQuestions().remove(entity);
-                
-                
-
                 questionRepository.delete(findById(id).get());
-                return true;
-                
-
+                return true;   
         } catch( Exception e){
             return false;
         }
