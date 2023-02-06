@@ -13,10 +13,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
-@Entity @NoArgsConstructor @AllArgsConstructor @Data
+@Entity @NoArgsConstructor @AllArgsConstructor @Data @Builder
 public class Source{
 
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )

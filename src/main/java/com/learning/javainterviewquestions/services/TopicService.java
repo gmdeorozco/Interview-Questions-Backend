@@ -1,6 +1,7 @@
 package com.learning.javainterviewquestions.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
-    public TopicEntity findByName(String topic) {
-        return topicRepository.findByName( topic );
+    public Optional<TopicEntity> findByName(String topic) {
+        return Optional.ofNullable(topicRepository.findByName( topic ));
     }
     
 }
