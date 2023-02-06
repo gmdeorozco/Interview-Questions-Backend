@@ -120,6 +120,19 @@ public class TopicServiceTest {
         topicService.save(javascriptTopic);
 
         assertEquals("Java", topicService.findByName("Java").get().getName());
+        
+
+    }
+
+    @Test
+    @DisplayName("return not present optional if search an unexisting topic")
+    void givenUnexistingTopicName_whenFindByName_ReturnEmptyOptional()
+    {
+        TopicEntity gitTopic = TopicEntity.builder()
+        .name("Git")
+        .build();
+
+        topicService.save(gitTopic);
         assertFalse(topicService.findByName("C++").isPresent());
 
     }
