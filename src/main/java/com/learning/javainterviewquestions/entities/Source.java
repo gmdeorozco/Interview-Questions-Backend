@@ -23,21 +23,23 @@ public class Source{
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
 
-    @Column( unique = true )
+    @Column( unique = true, nullable = false )
     private String name;
 
     private double elo;
 
-    @Column( length=500 )
+    @Column( length=500, nullable = false)
     private String sourceLink;
 
+    @Builder.Default
     @OneToMany( mappedBy="source", cascade = CascadeType.MERGE )
     List<QuestionEntity> questions =  new ArrayList<>();
 
+    @Column( nullable = false)
     private String topic;
 
     @ManyToOne
-    @JoinColumn(name="theTopic_id")
+    @JoinColumn(name="theTopic_id", nullable = false)
     private TopicEntity theTopic;
 
 }
