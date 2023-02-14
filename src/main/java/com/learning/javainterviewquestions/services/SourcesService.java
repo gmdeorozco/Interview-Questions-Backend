@@ -25,15 +25,6 @@ public class SourcesService {
         return sourceRepository.findById(id);
     }
 
-	public boolean deleteById(Long id) {
-		try{
-            sourceRepository.delete(findById(id).get());
-            return true;
-    } catch( Exception e){
-        return false;
-    }
-	}
-
     public Source save(Source entity) {
         return sourceRepository.save(entity);
     }
@@ -42,11 +33,7 @@ public class SourcesService {
         return sourceRepository.findAll(pageable);
     }
 
-    public Set<String> getAllTopics() {
-        return findAll().stream()
-        .map( source -> source.getTopic())
-        .collect(Collectors.toSet());
-    }
+    
 
     public List<Source> findAll() {
         return (List<Source>) sourceRepository.findAll();
@@ -59,6 +46,21 @@ public class SourcesService {
 
     public ArrayList<Source> findByTopic(String topic) {
         return (ArrayList<Source>) sourceRepository.findByTopic(topic);
+    }
+
+    public boolean deleteById(Long id) {
+		try{
+            sourceRepository.delete(findById(id).get());
+            return true;
+        } catch( Exception e){
+        return false;
+        }
+	}
+
+    public Set<String> getAllTopics() {
+        return findAll().stream()
+        .map( source -> source.getTopic())
+        .collect(Collectors.toSet());
     }
     
 }

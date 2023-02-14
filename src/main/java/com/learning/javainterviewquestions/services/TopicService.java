@@ -26,5 +26,7 @@ public class TopicService {
     public Optional<TopicEntity> findByName(String topic) {
         return Optional.ofNullable(topicRepository.findByName( topic ));
     }
+
+    
     
 }
