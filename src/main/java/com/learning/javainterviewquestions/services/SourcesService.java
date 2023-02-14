@@ -7,14 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.learning.javainterviewquestions.entities.Source;
-import com.learning.javainterviewquestions.models.SourceModel;
 import com.learning.javainterviewquestions.repositories.SourceRepository;
 
 @Service
@@ -29,12 +27,8 @@ public class SourcesService {
 
 	public boolean deleteById(Long id) {
 		try{
-
-            
             sourceRepository.delete(findById(id).get());
             return true;
-            
-
     } catch( Exception e){
         return false;
     }

@@ -1,1 +1,5 @@
-/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/JavaInterviewQuestionsApplicationTests.java
+/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/entities/TopicEntityTest.java
+/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/JavaInterviewQuestionsApplicationTests.java
+/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/services/QuestionServiceTest.java
+/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/services/TopicServiceTest.java
+/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/TopicRepositoryTest.java
