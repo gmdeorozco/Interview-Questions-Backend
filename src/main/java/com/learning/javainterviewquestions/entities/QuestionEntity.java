@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,7 @@ public class QuestionEntity implements Serializable {
 
     @Lob
     @Column(length=9000)
+    @Size(max = 9000, min = 5)
     private String code_snippet;
 
     @Column(nullable = false)
@@ -52,7 +54,9 @@ public class QuestionEntity implements Serializable {
     @JoinColumn(name="theTopic_id", nullable = false)
     private TopicEntity theTopic;
 
-    private double elo;
+    @Builder.Default
+    @Positive
+    private double elo = 1000;
 
     @ManyToOne
     @JoinColumn(name="source_id", nullable=true)

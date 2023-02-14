@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.Data;
 
 @Entity @NoArgsConstructor @AllArgsConstructor @Data @Builder
-public class Source{
+public class Source {
 
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
