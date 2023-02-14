@@ -24,6 +24,10 @@ import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.entities.TopicEntity;
 import com.learning.javainterviewquestions.repositories.QuestionRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceException;
+import jakarta.validation.ConstraintViolationException;
+
 @DataJpaTest
 public class QuestionServiceTest {
 
@@ -57,6 +61,9 @@ public class QuestionServiceTest {
 
     @Autowired
     SourcesService sourceService;
+
+    @Autowired
+    EntityManager entityManager;
   
     TopicEntity javaTopic, javascriptTopic, gitTopic;
     QuestionEntity java, springboot, junit, git, javascript;
@@ -93,6 +100,7 @@ public class QuestionServiceTest {
             .question("What is Java")
             .answer("It is a programming language")
             .topic("Java")
+            .theTopic(javaTopic)
             .build();
         
         springboot = QuestionEntity.builder()
@@ -137,7 +145,7 @@ public class QuestionServiceTest {
     @Test
     @DisplayName("saving question")
     void givenQuestionAndTopic_whenSaveQuestion_thenReturnItWithId(){
-        java.setTheTopic(javaTopic);
+        
         java = service.save(java);
         assertEquals("What is Java", java.getQuestion());
         
@@ -147,8 +155,11 @@ public class QuestionServiceTest {
     @DisplayName("saving question without topic")
     void givenQuestionWithoutTopic_whenSaveQuestion_thenReturnException(){
         java.setTopic(null);
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(PersistenceException.class, 
+            () -> {
+                service.save( java );
+                entityManager.flush();
+            }
         );
     }
 
@@ -156,8 +167,11 @@ public class QuestionServiceTest {
     @DisplayName("saving question without question")
     void givenQuestionWithoutQuestion_whenSaveQuestion_thenReturnException(){
         java.setQuestion("");
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(ConstraintViolationException.class, 
+            () ->{
+                service.save( java );
+                entityManager.flush();
+            } 
         );
     }
 
@@ -165,8 +179,11 @@ public class QuestionServiceTest {
     @DisplayName("saving question without answer")
     void givenQuestionWithoutAnswer_whenSaveQuestion_thenReturnException(){
         java.setAnswer("");
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(ConstraintViolationException.class, 
+            () -> {
+                service.save( java );
+                entityManager.flush();
+            } 
         );
     }
 
@@ -174,8 +191,11 @@ public class QuestionServiceTest {
     @DisplayName("saving question too short")
     void givenQuestionWithQuestionTooShort_whenSaveQuestion_thenReturnException(){
         java.setQuestion("abc");
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(ConstraintViolationException.class, 
+            () -> {
+                service.save( java );
+                entityManager.flush();
+            }
         );
     }
 
@@ -183,8 +203,11 @@ public class QuestionServiceTest {
     @DisplayName("saving answer too short")
     void givenQuestionWithAnswerTooShort_whenSaveQuestion_thenReturnException(){
         java.setAnswer("abc");
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(ConstraintViolationException.class, 
+            () -> {
+                service.save( java );
+                entityManager.flush();
+            } 
         );
     }
 
@@ -192,8 +215,11 @@ public class QuestionServiceTest {
     @DisplayName("saving topic question too short")
     void givenQuestionWithTopicTooShort_whenSaveQuestion_thenReturnException(){
         java.setTopic("ab");
-        assertThrows(DataIntegrityViolationException.class, 
-            () -> service.save( java )
+        assertThrows(ConstraintViolationException.class, 
+            () -> {
+                service.save( java );
+                entityManager.flush();
+            } 
         );
     }
 

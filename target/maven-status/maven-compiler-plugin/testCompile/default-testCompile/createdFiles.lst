@@ -1,4 +1,7 @@
 com/learning/javainterviewquestions/services/TopicServiceTest$TopicServiceTestConfiguration.class
 com/learning/javainterviewquestions/entities/TopicEntityTest.class
 com/learning/javainterviewquestions/JavaInterviewQuestionsApplicationTests.class
+com/learning/javainterviewquestions/services/QuestionServiceTest.class
+com/learning/javainterviewquestions/services/QuestionServiceTest$TopicServiceTestConfiguration.class
+com/learning/javainterviewquestions/repositories/TopicRepositoryTest.class
 com/learning/javainterviewquestions/services/TopicServiceTest.class

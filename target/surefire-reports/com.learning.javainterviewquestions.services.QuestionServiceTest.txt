@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.learning.javainterviewquestions.services.QuestionServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.84 s <<< FAILURE! - in com.learning.javainterviewquestions.services.QuestionServiceTest
-givenQuestionAndTopic_whenSaveQuestion_thenReturnItWithId  Time elapsed: 0.263 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "com.learning.javainterviewquestions.entities.QuestionEntity.getQuestion()" because "saved" is null
-	at com.learning.javainterviewquestions.services.QuestionServiceTest.givenQuestionAndTopic_whenSaveQuestion_thenReturnItWithId(QuestionServiceTest.java:80)
-
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.703 s - in com.learning.javainterviewquestions.services.QuestionServiceTest

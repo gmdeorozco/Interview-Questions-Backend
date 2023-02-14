@@ -18,5 +18,5 @@ com/learning/javainterviewquestions/controllers/SourceController.class
 com/learning/javainterviewquestions/models/SourceModel$SourceModelBuilder.class
 com/learning/javainterviewquestions/entities/Source.class
 com/learning/javainterviewquestions/models/QuestionModel.class
-com/learning/javainterviewquestions/entities/Source$SourceBuilder.class
 com/learning/javainterviewquestions/entities/QuestionEntity.class
+com/learning/javainterviewquestions/entities/Source$SourceBuilder.class
