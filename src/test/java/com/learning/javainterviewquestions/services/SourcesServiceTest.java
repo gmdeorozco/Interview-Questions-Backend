@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.context.annotation.Bean;
 
 import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.entities.TopicEntity;
@@ -17,6 +19,15 @@ import com.learning.javainterviewquestions.repositories.TopicRepository;
 
 @DataJpaTest
 public class SourcesServiceTest {
+
+    @TestConfiguration
+    static class Config{
+        @Bean
+        SourcesService getSourcesService(){
+            return new SourcesService();
+        }
+    }
+
     @SpyBean
     SourceRepository repository;
 
