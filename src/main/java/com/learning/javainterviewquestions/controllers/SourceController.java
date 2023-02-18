@@ -90,7 +90,7 @@ public class SourceController {
     @PostMapping("source/create")
     public ResponseEntity<SourceModel> save( @RequestBody Source source) {
 
-        TopicEntity topic = topicService.findByName(source.getTopic());
+        TopicEntity topic = topicService.findByName(source.getTopic()).get();
         source.setTheTopic(topic);
 
         Source s = sourcesService.save ( source );

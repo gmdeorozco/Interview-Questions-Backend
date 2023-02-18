@@ -2,19 +2,14 @@ package com.learning.javainterviewquestions.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.learning.javainterviewquestions.entities.QuestionEntity;
 import com.learning.javainterviewquestions.entities.Source;
-import com.learning.javainterviewquestions.models.QuestionModel;
 import com.learning.javainterviewquestions.repositories.QuestionRepository;
 
 @Service
@@ -26,27 +21,20 @@ public class QuestionService {
     @Autowired 
     SourcesService sourcesService;
 
+    public QuestionEntity save(QuestionEntity questionEntity) {
+        return questionRepository.save( questionEntity );
+    }
 
     public Optional<QuestionEntity> findById( Long id ) {
         return questionRepository.findById(id);
     }
 
-    public QuestionEntity save(QuestionEntity questionEntity) {
-        return questionRepository.save( questionEntity );
-    }
-
     public boolean deleteById ( Long id ){
         try{
-
                 QuestionEntity entity = findById(id).get();
                 entity.getTheTopic().getQuestions().remove(entity);
-                
-                
-
                 questionRepository.delete(findById(id).get());
-                return true;
-                
-
+                return true;   
         } catch( Exception e){
             return false;
         }
