@@ -112,7 +112,7 @@ public class QuestionController {
             questionEntity.setElo( original.getElo());
             
 
-            TopicEntity topic = topicService.findByName( questionEntity.getTopic());
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic()).get();
 
             questionEntity.setTheTopic(topic);
 

@@ -2,8 +2,9 @@ package com.learning.javainterviewquestions.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
-import org.hibernate.annotations.ManyToAny;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,7 +62,7 @@ public class QuestionEntity implements Serializable {
     
     @Builder.Default
     @Positive
-    private double elo;
+    private double elo = 1000;
 
     @ManyToOne
     @JoinColumn(name="source_id", nullable=true)

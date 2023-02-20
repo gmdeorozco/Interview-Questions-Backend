@@ -18,8 +18,13 @@ import org.springframework.web.reactive.function.client.WebClient.UriSpec;
 import org.springframework.web.util.UriBuilder;
 
 import com.learning.javainterviewquestions.elo.EloResult;
+import com.learning.javainterviewquestions.entities.EloType;
 import com.learning.javainterviewquestions.entities.Member;
+import com.learning.javainterviewquestions.entities.MemberElo;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
+import com.learning.javainterviewquestions.entities.TopicEntity;
+import com.learning.javainterviewquestions.repositories.MemberEloRepository;
+import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.MemberService;
 import com.learning.javainterviewquestions.services.QuestionService;
 
@@ -35,11 +40,37 @@ public class MemberController {
     MemberService memberService;
 
     @Autowired
+    TopicRepository topicRepository;
+
+    @Autowired
     QuestionService questionService;
+
+    @Autowired
+    MemberEloRepository memberEloRepository;
 
     @GetMapping("/{memberId}")
     public Member getById( @PathVariable Long memberId){
         return memberService.findById(memberId).get();
+    }
+
+    @GetMapping("elo/{memberId}/{topic}")
+    public MemberElo getByEloByMemberAndTopic( @PathVariable Long memberId , 
+        @PathVariable String topic){
+
+        TopicEntity topicEntity = topicRepository.findByName(topic);
+        Member member = memberService.findById(memberId).get();
+
+        return memberEloRepository.findById( 
+            EloType.builder()
+                .member( member )
+                .topic( topicEntity )
+                .build()
+        ).orElse(
+            memberEloRepository.save( MemberElo.builder()
+                .member(member)
+                .topic(topicEntity)
+                .build())
+        );
     }
     
     @GetMapping("/{memberId}/{questionId}/{whoWon}")
@@ -48,10 +79,19 @@ public class MemberController {
 
         Member member = memberService.findById( memberId ).get();
         QuestionEntity question = questionService.findById( questionId).get();
+        EloType eloType = new EloType( member, question.getTheTopic());
 
-        double eloFirstPlayer = member.getElo();
+        MemberElo memberElo = memberEloRepository.findById(eloType)
+            .orElse(MemberElo.builder()
+                        .elo(10000)
+                        .member(member)
+                        .topic(question.getTheTopic())
+                        .build());
+
+        double eloFirstPlayer = memberElo.getElo();
         double eloSecondPlayer = question.getElo();
-        int nGamesFirstPlayer = member.getNumberOfAnswers();
+
+        int nGamesFirstPlayer = memberElo.getQuestionEntities().size();
         int nGamesSecondPlayer = question.getNumberOfAnswers();
 
 
@@ -71,13 +111,15 @@ public class MemberController {
             .bodyToMono(EloResult.class)
             .block();
         
-        member.getAnsweredQuestions().add(question);
+        memberElo.getQuestionEntities().add(question);
         question.getMembersWhoAnswered().add(member);
-        member.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
+
+        memberElo.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
         question.setElo( Double.valueOf( createdResult.getPlayer2().getNewElo() ) );
 
         memberService.save( member );
         questionService.save( question );
+        memberEloRepository.save( memberElo);
 
         return ResponseEntity.ok( createdResult );
     }
