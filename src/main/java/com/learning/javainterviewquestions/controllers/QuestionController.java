@@ -67,7 +67,7 @@ public class QuestionController {
     @PostMapping("question/create")
     public ResponseEntity<QuestionModel> save( @RequestBody QuestionEntity questionEntity) {
 
-            TopicEntity topic = topicService.findByName( questionEntity.getTopic() );
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic() ).get();
             questionEntity.setTheTopic(topic);
             
 
@@ -75,8 +75,8 @@ public class QuestionController {
 
             topic.getQuestions().add( question );
 
-            return ResponseEntity.ok(
-                (questionModelAssembler.toModel( question )));
+            return new ResponseEntity<>( questionModelAssembler.toModel( question ), HttpStatus.CREATED);
+                
              
     }
 
@@ -84,7 +84,7 @@ public class QuestionController {
     public ResponseEntity<QuestionModel> save( @RequestBody QuestionEntity questionEntity,
         @PathVariable(value = "sourceId") Long sourceId) {
 
-            TopicEntity topic = topicService.findByName( questionEntity.getTopic() );
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic() ).get();
             questionEntity.setTheTopic(topic);
 
             QuestionEntity question = questionService.save ( questionEntity, sourceId );
@@ -127,7 +127,7 @@ public class QuestionController {
         @PathVariable(value = "sourceId") Long sourceId ) {
 
         Source source = sourcesService.findById(sourceId).get();
-        TopicEntity topic = topicService.findByName( questionEntity.getTopic());
+        TopicEntity topic = topicService.findByName( questionEntity.getTopic()).get();
 
         questionEntity.setSource( source);
         questionEntity.setTheTopic(topic);

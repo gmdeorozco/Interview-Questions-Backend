@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Retry.Topic;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,9 +49,9 @@ public class TopicController {
     }
 
     @PostMapping("/topics/create")
-    public TopicEntity creaTopicEntity( @RequestBody TopicEntity entity ){
+    public ResponseEntity<TopicEntity> creaTopicEntity( @RequestBody TopicEntity entity ){
         
-        return topicService.save(entity);
+        return new ResponseEntity<>( topicService.save(entity), HttpStatus.CREATED );
     }
 
 

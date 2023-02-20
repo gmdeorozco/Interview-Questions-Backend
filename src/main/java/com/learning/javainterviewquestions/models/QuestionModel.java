@@ -1,10 +1,6 @@
 package com.learning.javainterviewquestions.models;
 
-import java.util.List;
-
 import org.springframework.hateoas.RepresentationModel;
-
-import com.learning.javainterviewquestions.entities.Source;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
