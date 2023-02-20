@@ -46,6 +46,8 @@ public class Member {
         inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<QuestionEntity> answeredQuestions = new ArrayList<>();
 
+    
+
     public int getNumberOfAnswers(){
         return this.answeredQuestions.size();
     }

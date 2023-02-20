@@ -1,11 +1,8 @@
 package com.learning.javainterviewquestions.controllers;
 
-import java.net.URI;
+import java.util.List;
 
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
-import org.springframework.web.reactive.function.client.WebClient.UriSpec;
-import org.springframework.web.util.UriBuilder;
-
 import com.learning.javainterviewquestions.elo.EloResult;
-import com.learning.javainterviewquestions.entities.EloType;
 import com.learning.javainterviewquestions.entities.Member;
 import com.learning.javainterviewquestions.entities.MemberElo;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
@@ -27,9 +19,6 @@ import com.learning.javainterviewquestions.repositories.MemberEloRepository;
 import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.MemberService;
 import com.learning.javainterviewquestions.services.QuestionService;
-
-import io.netty.handler.codec.http.HttpHeaders;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/v1/member")
@@ -60,17 +49,26 @@ public class MemberController {
         TopicEntity topicEntity = topicRepository.findByName(topic);
         Member member = memberService.findById(memberId).get();
 
-        return memberEloRepository.findById( 
-            EloType.builder()
-                .member( member )
-                .topic( topicEntity )
-                .build()
-        ).orElse(
-            memberEloRepository.save( MemberElo.builder()
+       
+
+        List<MemberElo> memberElos = memberEloRepository.findAll();
+
+        List<MemberElo> returnMember = memberElos.stream()
+            .filter( m -> m != null )
+            .filter(m -> m.getTopic().getName().equalsIgnoreCase( topicEntity.getName() ))
+            .filter(m -> m.getMember().getId() == memberId )
+            .toList();
+
+        if( returnMember.isEmpty() ){
+            return memberEloRepository.save(MemberElo.builder()
                 .member(member)
                 .topic(topicEntity)
-                .build())
-        );
+                .build());
+
+        }
+
+        return memberEloRepository.save(returnMember
+            .get(0));
     }
     
 
@@ -82,15 +80,14 @@ public class MemberController {
 
         Member member = memberService.findById( memberId ).get();
         QuestionEntity question = questionService.findById( questionId).get();
-        EloType eloType = new EloType( member, question.getTheTopic());
+        String topicEntity = question.getTopic();
+       
 
-        System.out.println( "found *************** " + eloType.getTopic().getName() );
-
-        MemberElo memberElo = memberEloRepository.findById(eloType)
-            .orElse(MemberElo.builder()
-                        .member(member)
-                        .topic(question.getTheTopic())
-                        .build());
+        MemberElo memberElo = memberEloRepository.findAll().stream()
+            .filter(m -> m.getTopic().getName().equalsIgnoreCase( topicEntity ))
+            .filter(m -> m.getMember().getId() == member.getId() )
+            .toList()
+            .get(0);
 
         double eloFirstPlayer = memberElo.getElo();
         double eloSecondPlayer = question.getElo();
