@@ -51,7 +51,7 @@ public class MemberController {
 
         double eloFirstPlayer = member.getElo();
         double eloSecondPlayer = question.getElo();
-        int nGamesFirstPlayer = member.getNumberOfAnswers();
+        int nGamesFirstPlayer = memberElo.getNumberOfAnswers();
         int nGamesSecondPlayer = question.getNumberOfAnswers();
 
 
@@ -73,6 +73,7 @@ public class MemberController {
         
         member.getAnsweredQuestions().add(question);
         question.getMembersWhoAnswered().add(member);
+
         member.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
         question.setElo( Double.valueOf( createdResult.getPlayer2().getNewElo() ) );
 
