@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -39,7 +40,7 @@ public class MemberElo implements Serializable{
     private double elo = 1000; 
 
     @Builder.Default
-    @OneToMany
+    @ManyToMany
     @JsonIgnore
     private List<QuestionEntity> questionEntities = new ArrayList<>();
 }

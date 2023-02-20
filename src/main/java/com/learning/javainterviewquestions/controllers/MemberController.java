@@ -67,16 +67,18 @@ public class MemberController {
 
         }
 
-        return memberEloRepository.save(returnMember
-            .get(0));
+        return returnMember
+            .get(0);
     }
     
 
    
 
-    @GetMapping("/{memberId}/{questionId}/{whoWon}")
+    @GetMapping( "/{memberId}/{questionId}/{whoWon}" )
     public ResponseEntity<EloResult> processElos(
-        @PathVariable Long memberId, @PathVariable Long questionId, @PathVariable int whoWon){
+        @PathVariable Long memberId, 
+        @PathVariable Long questionId, 
+        @PathVariable int whoWon){
 
         Member member = memberService.findById( memberId ).get();
         QuestionEntity question = questionService.findById( questionId).get();
@@ -113,6 +115,7 @@ public class MemberController {
             .block();
         
         question.getMembersWhoAnswered().add(member);
+        member.getAnsweredQuestions().add(question);
         memberElo.getQuestionEntities().add(question);
         
 
