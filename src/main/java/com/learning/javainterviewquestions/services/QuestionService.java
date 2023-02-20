@@ -33,6 +33,10 @@ public class QuestionService {
         try{
                 QuestionEntity entity = findById(id).get();
                 entity.getTheTopic().getQuestions().remove(entity);
+                
+                entity.getMembersWhoAnswered().stream()
+                    .map( member -> member.getAnsweredQuestions().remove(entity));
+
                 questionRepository.delete(findById(id).get());
                 return true;   
         } catch( Exception e){

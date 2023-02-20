@@ -69,6 +69,7 @@ public class QuestionController {
 
             TopicEntity topic = topicService.findByName( questionEntity.getTopic() ).get();
             questionEntity.setTheTopic(topic);
+            
 
             QuestionEntity question = questionService.save ( questionEntity );
 
@@ -95,7 +96,7 @@ public class QuestionController {
              
     }
 
-    @PostMapping("question/create/many")
+    @PostMapping( "question/create/many" )
     public ResponseEntity<CollectionModel<QuestionModel>> save( @RequestBody List< QuestionEntity> questionEntities ) {
 
             return ResponseEntity.ok(
@@ -103,15 +104,25 @@ public class QuestionController {
              
     }
 
-    @PutMapping("question/update")
+    @PutMapping( "question/update" )
     public ResponseEntity<QuestionModel> update( @RequestBody QuestionEntity questionEntity) {
+
+            QuestionEntity original = questionService.findById( questionEntity.getId() ).get();
+            questionEntity.setMembersWhoAnswered( original.getMembersWhoAnswered() );
+            questionEntity.setElo( original.getElo());
+            
+
+            TopicEntity topic = topicService.findByName( questionEntity.getTopic());
+
+            questionEntity.setTheTopic(topic);
+
 
             return ResponseEntity.ok(
                 (questionModelAssembler.toModel( questionService.save ( questionEntity ) )));
              
     }
 
-    @PutMapping("question/update/source/{sourceId}")
+    @PutMapping( "question/update/source/{sourceId}" )
     public ResponseEntity<QuestionModel> updateWithSource( @RequestBody QuestionEntity questionEntity,
         @PathVariable(value = "sourceId") Long sourceId ) {
 
@@ -124,6 +135,10 @@ public class QuestionController {
         source.getQuestions().add(questionEntity);
         topic.getQuestions().add(questionEntity);
 
+        QuestionEntity original = questionService.findById( questionEntity.getId() ).get();
+            questionEntity.setMembersWhoAnswered( original.getMembersWhoAnswered() );
+            questionEntity.setElo( original.getElo());
+
         sourcesService.save(source);
         topicService.save(topic);
 
@@ -133,7 +148,7 @@ public class QuestionController {
              
     }
 
-    @DeleteMapping("question/{id}/delete")
+    @DeleteMapping( "question/{id}/delete" )
     public ResponseEntity<QuestionModel> deleteById( @PathVariable(value = "id") Long id ){
         ResponseEntity<QuestionModel> model = questionService.findById( id )
             .map( questionModelAssembler :: toModel )

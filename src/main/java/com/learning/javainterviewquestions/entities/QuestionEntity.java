@@ -1,7 +1,9 @@
 package com.learning.javainterviewquestions.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
+import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -50,17 +53,28 @@ public class QuestionEntity implements Serializable {
     @Size(min = 3)
     private String topic;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="theTopic_id", nullable = false)
     private TopicEntity theTopic;
 
+    
     @Builder.Default
     @Positive
-    private double elo = 1000;
+    private double elo;
 
     @ManyToOne
     @JoinColumn(name="source_id", nullable=true)
     private Source source;
+
+    @JsonIgnore
+    @Builder.Default
+    @ManyToMany(mappedBy = "answeredQuestions")
+    private List<Member> membersWhoAnswered =  new ArrayList<>();
+
+    public int getNumberOfAnswers(){
+        return this.membersWhoAnswered.size();
+    }
 
 
 }
