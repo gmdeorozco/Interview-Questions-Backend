@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -20,10 +22,12 @@ import lombok.NoArgsConstructor;
 public class MemberElo implements Serializable{
     @Id
     @ManyToOne
+    @JsonIgnore
     private Member member;
 
     @Id
     @ManyToOne
+    @JsonIgnore
     private TopicEntity topic;
 
     @Builder.Default
@@ -32,5 +36,6 @@ public class MemberElo implements Serializable{
 
     @Builder.Default
     @OneToMany
+    @JsonIgnore
     private List<QuestionEntity> questionEntities = new ArrayList<>();
 }
