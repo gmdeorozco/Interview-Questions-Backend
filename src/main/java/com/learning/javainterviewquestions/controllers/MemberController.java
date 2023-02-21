@@ -20,6 +20,8 @@ import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.MemberService;
 import com.learning.javainterviewquestions.services.QuestionService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("api/v1/member")
 @CrossOrigin(origins = "*")
@@ -73,7 +75,7 @@ public class MemberController {
     
 
    
-
+    @Transactional
     @GetMapping( "/{memberId}/{questionId}/{whoWon}" )
     public ResponseEntity<EloResult> processElos(
         @PathVariable Long memberId, 
@@ -114,9 +116,9 @@ public class MemberController {
             .bodyToMono(EloResult.class)
             .block();
         
-        question.getMembersWhoAnswered().add(member);
-        member.getAnsweredQuestions().add(question);
-        memberElo.getQuestionEntities().add(question);
+        question.getMembersWhoAnswered().add( member );
+        member.getAnsweredQuestions().add( question );
+        memberElo.getQuestionEntities().add( question );
         
 
         memberElo.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
