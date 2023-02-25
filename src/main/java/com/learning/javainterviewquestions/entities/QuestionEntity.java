@@ -47,7 +47,7 @@ public class QuestionEntity implements Serializable {
 
     @Lob
     @Column(length=9000 , nullable = true )
-    @Size(max = 9000, min = 5)
+    @Size(max = 9000, min = 0)
     private String code_snippet;
 
     @Column(nullable = false)
