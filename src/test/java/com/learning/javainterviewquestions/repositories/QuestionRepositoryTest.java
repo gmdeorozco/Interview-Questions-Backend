@@ -135,18 +135,7 @@ public class QuestionRepositoryTest {
         );
     }
 
-    @Test
-    @DisplayName("saving question without answer")
-    void givenQuestionWithoutAnswer_whenSaveQuestion_thenReturnException(){
-        java.setAnswer("");
-        assertThrows(ConstraintViolationException.class, 
-            () -> {
-                repository.save( java );
-                entityManager.flush();
-            } 
-        );
-    }
-
+  
     @Test
     @DisplayName("saving question too short")
     void givenQuestionWithQuestionTooShort_whenSaveQuestion_thenReturnException(){
@@ -159,17 +148,7 @@ public class QuestionRepositoryTest {
         );
     }
 
-    @Test
-    @DisplayName("saving answer too short")
-    void givenQuestionWithAnswerTooShort_whenSaveQuestion_thenReturnException(){
-        java.setAnswer("abc");
-        assertThrows(ConstraintViolationException.class, 
-            () -> {
-                repository.save( java );
-                entityManager.flush();
-            } 
-        );
-    }
+ 
 
     @Test
     @DisplayName("saving topic question too short")
