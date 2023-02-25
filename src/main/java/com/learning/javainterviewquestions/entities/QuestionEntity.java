@@ -40,9 +40,8 @@ public class QuestionEntity implements Serializable {
     private String question;
 
     @Lob
-    @Column(length=9000, nullable = false)
-    @Size(max = 9000, min = 5)
-    @NotBlank
+    @Column( length=9000, nullable = true )
+    @Size( max = 9000, min = 0 )
     private String answer;
 
     @Lob
