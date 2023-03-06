@@ -19,6 +19,7 @@ import com.learning.javainterviewquestions.repositories.MemberEloRepository;
 import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.MemberService;
 import com.learning.javainterviewquestions.services.QuestionService;
+import com.learning.javainterviewquestions.services.QuestionInteraction;
 
 import jakarta.transaction.Transactional;
 
@@ -127,6 +128,8 @@ public class MemberController {
         memberService.save( member );
         questionService.save( question );
         memberEloRepository.save( memberElo);
+
+        
 
         return ResponseEntity.ok( createdResult );
     }
