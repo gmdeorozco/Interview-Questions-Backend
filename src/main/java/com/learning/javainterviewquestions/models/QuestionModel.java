@@ -21,7 +21,9 @@ public class QuestionModel extends RepresentationModel <QuestionModel> {
     private SourceModel source;
     private int numberOfAnswers;
     private double elo;
-    private Long lastInteractionDays;
+
+    @Builder.Default
+    private Long lastInteractionDays=-1L;
     
     
 }
