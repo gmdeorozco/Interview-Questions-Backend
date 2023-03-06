@@ -63,7 +63,7 @@ public class QuestionModelAssembler extends
             .filter( inter -> inter.getMember().getId() == 1L )
             .toList();
 
-        Long daysFromLastInteraction = 0L;
+        Long daysFromLastInteraction = -1L;
         LocalDate lastInteractionDate = null;
 
         if( interactions.isEmpty() == false ){
