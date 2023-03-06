@@ -1,19 +1,13 @@
 package com.learning.javainterviewquestions.controllers;
 
 import java.util.List;
-import java.util.Set;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Retry.Topic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +25,6 @@ import com.learning.javainterviewquestions.entities.QuestionEntity;
 import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.entities.TopicEntity;
 import com.learning.javainterviewquestions.models.QuestionModel;
-import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.QuestionService;
 import com.learning.javainterviewquestions.services.SourcesService;
 import com.learning.javainterviewquestions.services.TopicService;
@@ -159,12 +152,12 @@ public class QuestionController {
             
     }
 
-    @GetMapping("question/all")
+    @GetMapping( "question/all" )
     public ResponseEntity<CollectionModel<QuestionModel>> findAll() {
         List<QuestionEntity> questionEntities = questionService.findAll();
         
         return new ResponseEntity<>(
-            questionModelAssembler.toCollectionModel(questionEntities),
+            questionModelAssembler.toCollectionModel( questionEntities ),
             HttpStatus.OK
         );
     }
@@ -178,8 +171,8 @@ public class QuestionController {
         Page<QuestionEntity> questionEntities = questionService.findAll(pageable);
         
         return new ResponseEntity<>
-            (pagedResourcesAssembler.toModel(questionEntities
-                ,questionModelAssembler), HttpStatus.OK);
+            ( pagedResourcesAssembler.toModel( questionEntities
+                ,questionModelAssembler ), HttpStatus.OK );
 }
         
     

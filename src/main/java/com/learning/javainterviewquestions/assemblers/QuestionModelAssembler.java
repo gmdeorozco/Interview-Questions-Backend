@@ -7,13 +7,20 @@ import org.springframework.stereotype.Component;
 import com.learning.javainterviewquestions.controllers.QuestionController;
 import com.learning.javainterviewquestions.controllers.SourceController;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
+import com.learning.javainterviewquestions.entities.QuestionInteraction;
 import com.learning.javainterviewquestions.entities.Source;
 import com.learning.javainterviewquestions.models.QuestionModel;
 import com.learning.javainterviewquestions.models.SourceModel;
 import com.learning.javainterviewquestions.services.QuestionService;
 
+import ch.qos.logback.core.util.Duration;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Component
 public class QuestionModelAssembler extends
@@ -51,6 +58,29 @@ public class QuestionModelAssembler extends
             methodOn(QuestionController.class)
                 .update( entity )
          ).withRel("update"));
+
+        List<QuestionInteraction> interactions  = entity.getInteractions().stream()
+            .filter( inter -> inter.getMember().getId() == 1L )
+            .toList();
+
+        Long daysFromLastInteraction = 0L;
+        LocalDate lastInteractionDate = null;
+
+        if( interactions.isEmpty() == false ){
+            lastInteractionDate = interactions.stream()
+                .filter( inter -> inter.getMember().getId() == 1L )
+                .map( inter -> inter.getDate() )
+                .max( LocalDate::compareTo)
+                .get();
+            
+            daysFromLastInteraction = ChronoUnit.DAYS.between(lastInteractionDate, LocalDate.now());
+        }
+
+       
+        
+        
+
+        questionModel.setLastInteractionDays( daysFromLastInteraction );
 
        
 

@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -72,9 +73,15 @@ public class QuestionEntity implements Serializable {
     @ManyToMany(mappedBy = "answeredQuestions")
     private List<Member> membersWhoAnswered =  new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany
+    private List<QuestionInteraction> interactions =  new ArrayList<>();
+
     public int getNumberOfAnswers(){
         return this.membersWhoAnswered.size();
     }
+
+    
 
 
 }

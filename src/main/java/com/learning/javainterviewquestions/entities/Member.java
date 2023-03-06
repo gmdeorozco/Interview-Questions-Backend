@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,7 +47,9 @@ public class Member {
         inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<QuestionEntity> answeredQuestions = new ArrayList<>();
 
-    
+    @Builder.Default
+    @OneToMany
+    private List<QuestionInteraction> interactions = new ArrayList<>();
 
     public int getNumberOfAnswers(){
         return this.answeredQuestions.size();

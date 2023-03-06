@@ -15,11 +15,13 @@ import com.learning.javainterviewquestions.entities.Member;
 import com.learning.javainterviewquestions.entities.MemberElo;
 import com.learning.javainterviewquestions.entities.QuestionEntity;
 import com.learning.javainterviewquestions.entities.TopicEntity;
+import com.learning.javainterviewquestions.entities.QuestionInteraction;
+import com.learning.javainterviewquestions.repositories.InteractionRepository;
 import com.learning.javainterviewquestions.repositories.MemberEloRepository;
 import com.learning.javainterviewquestions.repositories.TopicRepository;
 import com.learning.javainterviewquestions.services.MemberService;
 import com.learning.javainterviewquestions.services.QuestionService;
-import com.learning.javainterviewquestions.services.QuestionInteraction;
+
 
 import jakarta.transaction.Transactional;
 
@@ -39,6 +41,10 @@ public class MemberController {
 
     @Autowired
     MemberEloRepository memberEloRepository;
+
+    @Autowired
+    InteractionRepository interactionRepository;
+
 
     @GetMapping("/{memberId}")
     public Member getById( @PathVariable Long memberId){
@@ -125,10 +131,22 @@ public class MemberController {
         memberElo.setElo( Double.valueOf( createdResult.getPlayer1().getNewElo() ) );
         question.setElo( Double.valueOf( createdResult.getPlayer2().getNewElo() ) );
 
-        memberService.save( member );
-        questionService.save( question );
+        
+        
         memberEloRepository.save( memberElo);
 
+        QuestionInteraction interaction = QuestionInteraction.builder()
+            .member(member)
+            .question(question)
+            .build();
+
+        member.getInteractions().add(interaction);
+        question.getInteractions().add(interaction);
+
+        interactionRepository.save( interaction );
+        questionService.save( question );
+        memberService.save( member );
+        
         
 
         return ResponseEntity.ok( createdResult );
