@@ -1,6 +1,6 @@
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/entities/TopicEntityTest.java
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/QuestionRepositoryTest.java
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/SourceRepositoryTest.java
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/services/SourcesServiceTest.java
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/JavaInterviewQuestionsApplicationTests.java
-/workspaces/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/TopicRepositoryTest.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/SourceRepositoryTest.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/entities/TopicEntityTest.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/JavaInterviewQuestionsApplicationTests.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/QuestionRepositoryTest.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/services/SourcesServiceTest.java
+/workspace/Interview-Questions-Backend/src/test/java/com/learning/javainterviewquestions/repositories/TopicRepositoryTest.java

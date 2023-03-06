@@ -13,6 +13,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Data
@@ -27,9 +29,11 @@ class QuestionInteraction{
     private Long id;
 
     @JsonIgnore
+    @ManyToOne
     private Member member;
 
     @JsonIgnore
+    @ManyToOne
     private QuestionEntity question;
 
     @Builder.Default
